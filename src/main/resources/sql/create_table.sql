@@ -2,10 +2,9 @@ DROP TABLE IF EXISTS book;
 
 CREATE TABLE book
   (
-  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   status VARCHAR(40),
   book_id VARCHAR(30),
-  product_id VARCHAR(40),
+  product_id VARCHAR(40) NOT NULL PRIMARY KEY,
   author VARCHAR(100),
   title VARCHAR(200),
   year_of_publication INTEGER,
