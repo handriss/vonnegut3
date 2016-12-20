@@ -24,7 +24,6 @@ public class Book {
     @Column(name="book_id")
     private String bookId;
 
-    @Id
     @Column(name="product_id")
     private long productId;
 
@@ -48,6 +47,10 @@ public class Book {
 
     @Column(name="price")
     private int price;
+
+    @Column(name="date_of_upload")
+    @Type(type="timestamp")
+    private Date dateOfUpload;
 
     @Column(name="date_of_shop_sale")
     @Type(type="timestamp")
@@ -83,10 +86,11 @@ public class Book {
     private String isbn;
 
     // constructor
-    public Book(int id, Status status, String bookId, String author, String title, int yearOfPublication, String publisher, String barcode, String storagePlace, int price, Date dateOfShopSale, String shopId, float weight, int numberOfPages, Cover cover, BookCondition book_condition, String moreInfo, String uploader, String category, String isbn) {
-        this.id = id;
+
+    public Book(Status status, String bookId, long productId, String author, String title, int yearOfPublication, String publisher, String barcode, String storagePlace, int price,Date dateOfUpload, Date dateOfShopSale, String shopId, float weight, int numberOfPages, Cover cover, BookCondition book_condition, String moreInfo, String uploader, String category, String isbn) {
         this.status = status;
         this.bookId = bookId;
+        this.productId = productId;
         this.author = author;
         this.title = title;
         this.yearOfPublication = yearOfPublication;
@@ -94,6 +98,7 @@ public class Book {
         this.barcode = barcode;
         this.storagePlace = storagePlace;
         this.price = price;
+        this.dateOfUpload = dateOfUpload;
         this.dateOfShopSale = dateOfShopSale;
         this.shopId = shopId;
         this.weight = weight;
