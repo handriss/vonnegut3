@@ -1,5 +1,8 @@
 package actions;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
@@ -7,14 +10,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 
 
 public class Login {
 
     private String targetURL;
     private String urlParameters;
+    private String username;
 
     public Login(String username, String password) {
+        this.username = username;
         targetURL = "https://admin.bookline.hu/user/login.action";
         urlParameters = "username=" + username + "&password=" + password + "&submit=bel%C3%A9p%C3%A9s&returnUrl=";
     }
@@ -56,16 +62,21 @@ public class Login {
                 InputStream is = connection.getInputStream();
                 BufferedReader rd = new BufferedReader(new InputStreamReader(is));
                 String line;
-                StringBuffer response = new StringBuffer();
+                StringBuilder response = new StringBuilder();
                 while((line = rd.readLine()) != null) {
                     response.append(line);
-                    response.append('\r');
+                    response.append('\n');
 //                    System.out.println(line);
                 }
-                rd.close();
 
+                rd.close();
                 List<String> cookies = connection.getHeaderFields().get("Set-Cookie");
                 System.out.println(cookies);
+
+//                System.out.println(response.toString());
+
+                Boolean successful = getAuthenticationResult(response.toString());
+                System.out.println(successful);
                 return response.toString();
 
             } catch (Exception e) {
@@ -77,6 +88,17 @@ public class Login {
                     connection.disconnect();
                 }
             }
+        }
+    }
+
+    private boolean getAuthenticationResult(String htmlContent){
+        Document document = Jsoup.parse(htmlContent);
+        String result = document.getElementsByClass("username").text();
+
+        if(Objects.equals(result, username)){
+            return true;
+        } else{
+            return false;
         }
     }
 }
