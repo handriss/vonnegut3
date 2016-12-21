@@ -2,9 +2,7 @@ import actions.Login;
 
 import java.util.Scanner;
 
-/**
- * Created by lombocska on 2016.12.21..
- */
+
 public class ControlFromTerminal {
 
     // to try the project in console
