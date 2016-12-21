@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 
 public class Login {
@@ -59,9 +60,12 @@ public class Login {
                 while((line = rd.readLine()) != null) {
                     response.append(line);
                     response.append('\r');
-                    System.out.println(line);
+//                    System.out.println(line);
                 }
                 rd.close();
+
+                List<String> cookies = connection.getHeaderFields().get("Set-Cookie");
+                System.out.println(cookies);
                 return response.toString();
 
             } catch (Exception e) {
