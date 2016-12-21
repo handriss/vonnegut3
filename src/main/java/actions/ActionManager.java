@@ -11,7 +11,8 @@ public class ActionManager {
     }
 
     public void login(){
-
+        Login login = new Login(username, password);
+        login.authenticate();
     }
 
     public void logout(){
