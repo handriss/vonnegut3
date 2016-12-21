@@ -23,7 +23,7 @@ public class Main {
             Date dateOfUpload = sdf.parse("12/13/2016 08:39:29");
             Date dateOfSold = null;
 
-            Book tempBook = new Book(Status.ÁRULHATÓ, "644909", 2103982191, "Herbie Brennan", "Az ókori Egyiptom titkos története - Hogyan tűnt el egy fejlett civilizáció?", 2000, "Alexandra Kiadó", "'0609001023751", "c19", 1490, dateOfUpload, dateOfSold, "60", 1.5f, 239, Cover.FÉLMŰBŐR, BookCondition.HIÁBTLAN, "tarara", "menyhard", "romantic", "9789789789788");
+            Book tempBook = new Book(Status.ÁRULHATÓ, "644909", 2103982191, "Herbie Brennan", "Az ókori Egyiptom titkos története - Hogyan tűnt el egy fejlett civilizáció?", 2000, "Alexandra Kiadó", "0609001023751", "c19", 1490, dateOfUpload, dateOfSold, "60", 1.5f, 239, Cover.FÉLMŰBŐR, BookCondition.HIÁBTLAN, "tarara", "menyhard", "romantic", "9789789789788");
 
             // start transaction
             session.beginTransaction();

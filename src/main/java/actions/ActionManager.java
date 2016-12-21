@@ -1,18 +1,30 @@
 package actions;
 
 
+import java.util.Objects;
+
 public class ActionManager {
     private String username;
     private String password;
+    private boolean loggedIn;
+    private String sessionId;
 
     public ActionManager(String username, String password){
         this.username = username;
         this.password = password;
+        loggedIn = false;
     }
 
     public void login(){
         Login login = new Login(username, password);
-        login.authenticate();
+        String result = login.authenticate();
+
+        if(!Objects.equals( result, "Unsuccessful")){
+            loggedIn = true;
+            sessionId = result;
+        }
+
+        System.out.println(sessionId);
     }
 
     public void logout(){
@@ -20,10 +32,13 @@ public class ActionManager {
     }
 
     public void activate(){
-
+        if(!loggedIn){
+            return;
+        }
+        BookStatusHandler.activate("0609001023751", sessionId);
     }
 
     public void deactivate(){
-
+//        BookStatusHandler.deactivate();
     }
 }
