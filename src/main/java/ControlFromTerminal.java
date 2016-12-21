@@ -1,3 +1,4 @@
+import actions.ActionManager;
 import actions.Login;
 
 import java.util.Scanner;
@@ -16,6 +17,9 @@ public class ControlFromTerminal {
 
         System.out.println("Username: " + username);
         System.out.println("Password: " + password);
+
+        ActionManager actionManager = new ActionManager(username, password);
+
         Login login = new Login(username, password);
         login.authenticate();
     }
