@@ -1,4 +1,4 @@
-package actions;
+package action_handling.actions;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

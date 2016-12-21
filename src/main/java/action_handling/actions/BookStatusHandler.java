@@ -1,4 +1,4 @@
-package actions;
+package action_handling.actions;
 
 
 import java.io.BufferedReader;
@@ -70,8 +70,4 @@ public class BookStatusHandler {
             }
         }
     }
-
-//    public static boolean deactivate(String barcode){
-//
-//    }
 }
