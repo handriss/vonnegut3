@@ -42,6 +42,9 @@ public class ActionManager {
     }
 
     public void deactivate(){
-//        BookStatusHandler.deactivate();
+        if(!loggedIn){
+            return;
+        }
+        BookStatusHandler.deactivate("2103982191", sessionId);
     }
 }
