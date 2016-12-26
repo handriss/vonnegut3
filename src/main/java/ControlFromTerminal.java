@@ -1,4 +1,5 @@
-import actions.ActionManager;
+import action_handling.ActionManager;
+import action_handling.actions.AuthenticationHandler;
 
 
 public class ControlFromTerminal {
@@ -15,8 +16,8 @@ public class ControlFromTerminal {
         String username = "menyhard";
         String password = "nickhornby1";
         // login
-        ActionManager actionManager = new ActionManager(username, password);
-        actionManager.login();
+        AuthenticationHandler handler = new AuthenticationHandler(username, password);
+        ActionManager actionManager = new ActionManager(handler.login());
         actionManager.activate();
     }
 }

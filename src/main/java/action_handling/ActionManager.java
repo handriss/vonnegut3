@@ -1,50 +1,43 @@
 package action_handling;
 
 
-import action_handling.actions.BookStatusHandler;
-import action_handling.actions.Login;
-
-import java.util.Objects;
+import action_handling.actions.BooklineActionHandler;
 
 public class ActionManager {
-    private String username;
-    private String password;
     private boolean loggedIn;
     private String sessionId;
+//    AuthenticationHandler authenticationHandler;
 
     public ActionManager(String username, String password){
-        this.username = username;
-        this.password = password;
-        loggedIn = false;
+        login(username, password);
     }
 
-    public void login(){
-        Login login = new Login(username, password);
-        String result = login.authenticate();
+    public ActionManager(String sessionId){
+        this.sessionId = sessionId;
+    }
 
-        if(!Objects.equals( result, "Unsuccessful")){
-            loggedIn = true;
-            sessionId = result;
-        }
-
-        System.out.println(sessionId);
+    private void login(String username, String password){
+        this.sessionId = BooklineActionHandler.login(username, password);
     }
 
     public void logout(){
+        if(!loggedIn){
+            return;
+        }
 
     }
 
     public void activate(){
-        if(!loggedIn){
-            return;
-        }
-        BookStatusHandler.activate("0609001023751", sessionId);
+//        if(!loggedIn){
+//            return;
+//        }
+        BooklineActionHandler.activate("0609001023751", sessionId);
     }
 
     public void deactivate(){
-        if(!loggedIn){
-            return;
-        }
-        BookStatusHandler.deactivate("2103982191", sessionId);
+//        if(!loggedIn){
+//            return;
+//        }
+        BooklineActionHandler.deactivate("2103982191", sessionId);
     }
 }

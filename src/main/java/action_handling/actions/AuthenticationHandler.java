@@ -13,20 +13,20 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class Login {
+public class AuthenticationHandler {
 
     private String targetURL;
     private String urlParameters;
     private String username;
 
-    public Login(String username, String password) {
+    public AuthenticationHandler(String username, String password) {
         this.username = username;
         targetURL = "https://admin.bookline.hu/user/login.action";
         urlParameters = "username=" + username + "&password=" + password + "&submit=bel%C3%A9p%C3%A9s&returnUrl=";
     }
 
 
-    public String authenticate() {
+    public String login() {
         URL url;
         HttpURLConnection connection = null;
 
@@ -65,6 +65,7 @@ public class Login {
             while((line = rd.readLine()) != null) {
                 response.append(line);
                 response.append('\n');
+                System.out.println(line);
             }
 
             rd.close();
@@ -95,5 +96,9 @@ public class Login {
         } else{
             return false;
         }
+    }
+
+    public String logout(){
+        return "";
     }
 }
