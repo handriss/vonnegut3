@@ -15,10 +15,10 @@ public class ActionManager {
     }
 
     public void logout(){
-        if(!loggedIn){
-            return;
-        }
-
+//        if(!loggedIn){
+//            return;
+//        }
+        BooklineActionHandler.logout(sessionId);
     }
 
     public void activate(){

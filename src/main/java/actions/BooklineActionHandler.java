@@ -32,8 +32,11 @@ public class BooklineActionHandler {
         return sendRequest(targetURL, requestMethod, sessionId, urlParameters);
     }
 
-    public static boolean logout(){
-        return false;
+    public static String logout(String sessionId){
+        String targetURL = "https://admin.bookline.hu/user/logout.action";
+        String requestMethod = "POST";
+        String urlParameters = "";
+        return sendRequest(targetURL, requestMethod, sessionId, urlParameters);
     }
 
 
@@ -89,6 +92,11 @@ public class BooklineActionHandler {
                 response.append(line);
                 response.append('\n');
             }
+
+            System.out.println("----------------------------------------------------");
+            System.out.println(response);
+            System.out.println("----------------------------------------------------");
+
 
             rd.close();
 
