@@ -93,9 +93,9 @@ public class BooklineActionHandler {
                 response.append('\n');
             }
 
-            System.out.println("----------------------------------------------------");
-            System.out.println(response);
-            System.out.println("----------------------------------------------------");
+//            System.out.println("----------------------------------------------------");
+//            System.out.println(response);
+//            System.out.println("----------------------------------------------------");
 
 
             rd.close();
