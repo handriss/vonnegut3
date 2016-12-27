@@ -14,7 +14,6 @@ public class ControlFromTerminal {
         Scanner passwordScanner = new Scanner(System.in);
         String password = passwordScanner.next();
 
-
         // login
         ActionManager actionManager = new ActionManager(username, password);
 
@@ -33,10 +32,10 @@ public class ControlFromTerminal {
             }
             if ("3".equals(choice)) {
                 System.out.println("chosen logout" );
-//                actionManager.logout();
+                actionManager.logout();
             }
 //            if ("4".equals(choice)) {
-//                System.out.println("choosed logout: " );
+//                System.out.println("choosed query: " );
 //
 //            }
         }
