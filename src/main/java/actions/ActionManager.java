@@ -45,5 +45,13 @@ public class ActionManager {
         BooklineActionHandler.deactivate("2103982191", sessionId);
     }
 
+    public void queryBook(){
+        if(!loggedIn){
+            System.out.println("you aren't loggedIn");
+            return;
+        }
+        BooklineActionHandler.queryBook(sessionId);
+    }
+
 
 }

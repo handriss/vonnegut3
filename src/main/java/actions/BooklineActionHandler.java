@@ -57,6 +57,17 @@ public class BooklineActionHandler {
         sendRequest(targetURL, requestMethod, sessionId, urlParameters);
     }
 
+    public static void queryBook(String sessionId) {
+        String targetURL = "https://admin.bookline.hu/product/torzsadatAntik.action";
+        String requestMethod = "GET";
+        String urlParameters = "length=500&author=&title=&descId=&productId=&yearMin=&yearMax=&publisherId=&publisher=&ean13=&imageFilter=&image=&createdFrom=2016-12-12&createdFromTime=00%3A00&createdTo=2016-12-24&createdToTime=23%3A59&shopsellFrom=&shopsellFromTime=00%3A00&shopsellTo=&shopsellToTime=23%3A59&minPrice=&maxPrice=&moreinfo=&tarolohely=&creator=&orderBy=book_id&__checkbox_needImage=true&submit=keres%C3%A9s";
+
+//        System.out.println(Arrays.toString(sendRequest(targetURL, requestMethod, sessionId, urlParameters).split("státusz")));
+        System.out.println(sendRequest(targetURL, requestMethod, sessionId, urlParameters));
+
+
+    }
+
     private static String sendRequest(String targetURL, String requestMethod, String sessionId, String urlParameters){
 
         URL url;
@@ -93,9 +104,6 @@ public class BooklineActionHandler {
                 response.append('\n');
             }
 
-//            System.out.println("----------------------------------------------------");
-//            System.out.println(response);
-//            System.out.println("----------------------------------------------------");
 
 
             rd.close();
@@ -103,7 +111,11 @@ public class BooklineActionHandler {
             if(sessionId == null && getAuthenticationResult(response.toString())){
                 List<String> cookies = connection.getHeaderFields().get("Set-Cookie");
                 return cookies.get(0).split(";")[0];
+            }else if(Objects.equals(targetURL, "https://admin.bookline.hu/product/torzsadatAntik.action")){
+                Document document = Jsoup.parse(response.toString());
+                return  document.getElementsByTag("tr").text();
             }
+
 
 
         } catch (IOException e) {

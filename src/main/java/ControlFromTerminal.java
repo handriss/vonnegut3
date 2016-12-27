@@ -37,10 +37,11 @@ public class ControlFromTerminal {
                 System.out.println("chosen logout" );
                 actionManager.logout();
             }
-//            if ("4".equals(choice)) {
-//                System.out.println("choosed query: " );
-//
-//            }
+            if ("4".equals(choice)) {
+                System.out.println("choosed query: " );
+                actionManager.queryBook();
+
+            }
         }
         choose.close();
     }
