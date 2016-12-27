@@ -1,5 +1,8 @@
-package action_handling.actions;
+package actions;
 
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -17,15 +20,12 @@ public class BooklineActionHandler {
         tempMap.put("Upgrade-Insecure-Requests", "1");
         tempMap.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
         tempMap.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-        tempMap.put("Accept-Encoding", "gzip, deflate, sdch, br");
         tempMap.put("Content-Type", "application/x-www-form-urlencoded");
-        tempMap.put("Accept-Language", "hu-HU,hu;q=0.8,en-US;q=0.6,en;q=0.4,de;q=0.2");
-        tempMap.put("Accept", "\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\"");
         finalRequestProperties = Collections.unmodifiableMap(tempMap);
     }
 
     public static String login(String username, String password){
-        String targetURL = "https://admin.bookline.hu/user/login!redirectInput.action";
+        String targetURL = "https://admin.bookline.hu/user/login.action";
         String requestMethod = "POST";
         String urlParameters = "username=" + username + "&password=" + password + "&submit=bel%C3%A9p%C3%A9s&returnUrl=";
         String sessionId = null;
@@ -70,8 +70,7 @@ public class BooklineActionHandler {
             if(sessionId != null){
                 connection.setRequestProperty("Cookie", sessionId);
             }
-//            connection.setRequestProperty("Referer", targetURL);
-            connection.setRequestProperty("Referer", "https://admin.bookline.hu/user/login!redirectInput.action");
+            connection.setRequestProperty("Referer", targetURL);
             connection.setDoInput(true);
             connection.setDoOutput(true);
 
@@ -89,12 +88,12 @@ public class BooklineActionHandler {
             while((line = rd.readLine()) != null) {
                 response.append(line);
                 response.append('\n');
-                System.out.println(line);
             }
 
             rd.close();
-            List<String> cookies = connection.getHeaderFields().get("Set-Cookie");
-            if(Objects.equals(sessionId, "")){
+
+            if(sessionId == null && getAuthenticationResult(response.toString())){
+                List<String> cookies = connection.getHeaderFields().get("Set-Cookie");
                 return cookies.get(0).split(";")[0];
             }
 
@@ -107,5 +106,16 @@ public class BooklineActionHandler {
             }
         }
         return "";
+    }
+
+    private static boolean getAuthenticationResult(String htmlContent){
+        Document document = Jsoup.parse(htmlContent);
+        String result = document.getElementsByClass("username").text();
+
+        if(!Objects.equals(result, "")){
+            return true;
+        }else {
+            return false;
+        }
     }
 }

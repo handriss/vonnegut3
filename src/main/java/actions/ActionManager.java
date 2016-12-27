@@ -1,7 +1,5 @@
-package action_handling;
+package actions;
 
-
-import action_handling.actions.BooklineActionHandler;
 
 public class ActionManager {
     private boolean loggedIn;
@@ -9,15 +7,11 @@ public class ActionManager {
 //    AuthenticationHandler authenticationHandler;
 
     public ActionManager(String username, String password){
-        login(username, password);
+        this.sessionId = BooklineActionHandler.login(username, password);
     }
 
     public ActionManager(String sessionId){
         this.sessionId = sessionId;
-    }
-
-    private void login(String username, String password){
-        this.sessionId = BooklineActionHandler.login(username, password);
     }
 
     public void logout(){
@@ -32,6 +26,7 @@ public class ActionManager {
 //            return;
 //        }
         BooklineActionHandler.activate("0609001023751", sessionId);
+
     }
 
     public void deactivate(){
@@ -40,4 +35,6 @@ public class ActionManager {
 //        }
         BooklineActionHandler.deactivate("2103982191", sessionId);
     }
+
+
 }
