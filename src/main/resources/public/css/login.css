@@ -1,0 +1,43 @@
+/* =====Login=====*/
+body[role="login"] {
+    font-family: 'Roboto', sans-serif;
+    background: url('https://wallpaperscraft.com/image/shelf_library_roots_books_77011_2048x1152.jpg') fixed;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+}
+
+[role="login"] .container {
+    margin-top: 100px
+}
+[role="login"] .btn-success {
+    background: #76B831;
+    border: 1px solid #679F2C;
+    float: right
+}
+[role="login"] label {
+    font-weight: normal;
+    color:  #A0A0A0;
+}
+.panel-heading {
+    padding: 5px 15px;
+}
+.form-inline {
+    margin: 5px
+}
+.panel-footer {
+    padding: 1px 15px;
+    color: #A0A0A0;
+}
+
+.profile-img {
+    margin: 0 auto 10px;
+    display: block;
+}
+.panel-default {
+    opacity: .85;
+}
+
+.panel {
+    background-color: azure;
+}
